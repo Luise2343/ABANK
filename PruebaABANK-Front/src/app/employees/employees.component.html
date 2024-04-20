@@ -1,0 +1,91 @@
+<div class="mat-elevation-z8 container">
+  <button mat-raised-button color="primary" (click)="toggleForm()">Nuevo Empleado</button>
+  
+  <div *ngIf="showForm" class="form-container">
+    <h2>{{ editingEmployee ? 'Editar Empleado' : 'Crear Nuevo Empleado' }}</h2>
+    <form>
+      <!-- Formulario de creación o edición -->
+      <mat-form-field class="form-field">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="newEmployeeData.nombres" name="nombres">
+      </mat-form-field>
+      
+      <mat-form-field class="form-field">
+        <mat-label>Apellido</mat-label>
+        <input matInput [(ngModel)]="newEmployeeData.apellidos" name="apellidos">
+      </mat-form-field>
+      
+      <mat-form-field class="form-field">
+        <mat-label>Teléfono</mat-label>
+        <input matInput [(ngModel)]="newEmployeeData.telefono" name="telefono">
+      </mat-form-field>
+      
+      <mat-form-field class="form-field">
+        <mat-label>Correo</mat-label>
+        <input matInput [(ngModel)]="newEmployeeData.correo" name="correo">
+      </mat-form-field>
+      
+      <input type="hidden" name="fechacontratacion" [value]="getCurrentDate()">
+      <input type="hidden" [(ngModel)]="newEmployeeData.fechacontratacion" name="fechacontratacion">
+
+      <mat-form-field class="form-field">
+        <mat-label>ID de Área</mat-label>
+        <input matInput type="number" [(ngModel)]="newEmployeeData.idarea" name="idarea">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="button" (click)="saveEmployee()">
+        {{ editingEmployee ? 'Guardar' : 'Crear' }}
+      </button>
+      <button mat-button type="button" (click)="cancel()">Cancelar</button>
+    </form>
+  </div>
+
+  <table mat-table [dataSource]="employees" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let empleado">{{ empleado.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombres">
+      <th mat-header-cell *matHeaderCellDef>Nombres</th>
+      <td mat-cell *matCellDef="let empleado">{{ empleado.nombres }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="apellidos">
+      <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+      <td mat-cell *matCellDef="let empleado">{{ empleado.apellidos }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+      <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+      <td mat-cell *matCellDef="let empleado">{{ empleado.telefono }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="correo">
+      <th mat-header-cell *matHeaderCellDef>Correo</th>
+      <td mat-cell *matCellDef="let empleado">{{ empleado.correo }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="departamento">
+      <th mat-header-cell *matHeaderCellDef>Departamento</th>
+      <td mat-cell *matCellDef="let empleado">{{ empleado.departamento}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="editar">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let empleado">
+        <button mat-button color="primary" (click)="editEmployee(empleado)">Editar</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="7">No hay datos disponibles</td>
+    </tr>
+  </table>
+</div>
+
+
+

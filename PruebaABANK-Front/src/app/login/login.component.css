@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card-container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+
+
+
